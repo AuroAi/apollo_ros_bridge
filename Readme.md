@@ -19,8 +19,8 @@ Maintainer: Abhilash Balachandran abhilash@ridecell.com
 
 There is a prebuild docker image which can be directly used. To use the prebuilt docker image:
 
-     cd docker_tools
-     ./run.sh
+    cd docker_tools
+    ./run.sh
 
 ### Building docker image
 
@@ -35,13 +35,13 @@ If no image name is provided, it defaults to [?]
 
 In order to build the bridge, first build the appropriate ros messages used in the bridge source code:
 
-        cd /home/cyber_ros_bridge/ros_pkgs
-        catkin build
+    cd /home/cyber_ros_bridge/ros_pkgs
+    catkin build
 
 Now, build the bridge source code using bazel. From the root workspace of the package,
      
-        cd /home/apollo_ros_bridge
-        bazel build cyber_ros_bridge:all
+    cd /home/apollo_ros_bridge
+    bazel build cyber_ros_bridge:all
 
 
 To run the example node, run
@@ -50,7 +50,7 @@ To run the example node, run
 
 for extra logging,
 
-        GLOG_v=4 GLOG_logtostderr=1  ./bazel-bin/cyber_ros_bridge/cyber_ros_bridge
+    GLOG_v=4 GLOG_logtostderr=1  ./bazel-bin/cyber_ros_bridge/cyber_ros_bridge
 
 This launches the bridge with default params (defined in the common folder).
 
