@@ -39,7 +39,8 @@ In order to build the bridge, first build the appropriate ros messages used in t
         catkin build
 
 Now, build the bridge source code using bazel. From the root workspace of the package,
-        cd /home/apollo_rosr_bridge
+     
+        cd /home/apollo_ros_bridge
         bazel build cyber_ros_bridge:all
 
 
