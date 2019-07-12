@@ -58,13 +58,16 @@ Alternatively, to launch the bridge with custom parameters,
 
     cyber_launch start cyber_ros_bridge/launch/bridge_example.launch
 
-For detailed information on how to add own bridging of topics, refer to [adding custom bridging](https://github.com/AuroAi/apollo_ros_bridge/blob/master/docs/adding_custom_bridging.md "here")
 
 Run [Apollo ](https://github.com/ApolloAuto/apollo/blob/master/docs/quickstart/apollo_3_5_quick_start.md "Apollo ")
 
 Topics can be visualized with rostopic list and echo
 
 Alternatively, publish relevant topics from ROS and view topics using [cyber_monitor](https://github.com/ApolloAuto/apollo/blob/master/docs/cyber/CyberRT_Developer_Tools.md "cyber_monitor") on Apollo's side
+
+## Adding Custom Bridging
+
+For detailed information on how to add own bridging of topics, refer to [adding custom bridging](https://github.com/AuroAi/apollo_ros_bridge/blob/master/docs/adding_custom_bridging.md "here")
 
 ## Copyright and License
 
