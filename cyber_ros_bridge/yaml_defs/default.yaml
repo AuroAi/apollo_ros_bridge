@@ -1,0 +1,52 @@
+# trigger is the only supported mode now
+- mode: Trigger
+
+# Multiple topics can be mapped to one Output Topic
+# FORMAT
+# - ROS/Apollo:
+#     - Output_Topic_Name: name of the output ROS topic 
+#       msg_type: message type 
+#       Input_Topics:
+#         - Input_Topic_Name: Apollo topic name
+#           msg_type: apollo message type
+#           trigger_topic: Set to true always
+#       Input_Topics:
+#         - Input_Topic_Name: Apollo topic name
+#           msg_type: apollo message type
+#           trigger_topic: Set to true always
+
+
+# These are the topics that are converted to Apollo(Cyber) topics
+- Apollo:
+    - Output_Topic_Name: /apollo/sensor/lidar128/compensator/PointCloud2
+      msg_type: apollo::drivers::PointCloud
+      # publish_freq: 50
+      Input_Topics:
+        - Input_Topic_Name: /point_cloud
+          msg_type: sensor_msgs::PointCloud2
+          trigger_topic: true
+
+ 
+    
+# These are the topics that are converted to ROS topics
+
+- ROS:
+    - Output_Topic_Name: /path
+      msg_type: nav_msgs::Path
+      Input_Topics:
+        - Input_Topic_Name: /apollo/planning
+          msg_type: apollo::planning::ADCTrajectory
+          trigger_topic: true
+    - Output_Topic_Name: /odom
+      msg_type: nav_msgs::Odometry
+      Input_Topics:
+        - Input_Topic_Name: /apollo/localization/pose
+          msg_type: apollo::localization::LocalizationEstimate
+          trigger_topic: true
+    - Output_Topic_Name: /point_cloud
+      msg_type: sensor_msgs::PointCloud2
+      Input_Topics:
+        - Input_Topic_Name: /apollo/sensor/lidar128/compensator/PointCloud2
+          msg_type: apollo::drivers::PointCloud
+          trigger_topic: true 
+

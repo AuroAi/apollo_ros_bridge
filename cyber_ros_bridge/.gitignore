@@ -1,0 +1,5 @@
+#Do not add these folders
+.vscode/
+
+#Do not add these files
+.clang-format

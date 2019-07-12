@@ -1,0 +1,65 @@
+/******************************************************************************
+ * Copyright 2018 The Apollo Authors. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *****************************************************************************/
+
+#ifndef CYBER_SCHEDULER_PROCESSOR_H_
+#define CYBER_SCHEDULER_PROCESSOR_H_
+
+#include <atomic>
+#include <condition_variable>
+#include <memory>
+#include <mutex>
+#include <string>
+#include <thread>
+#include <vector>
+
+#include "cyber/croutine/croutine.h"
+#include "cyber/proto/scheduler_conf.pb.h"
+#include "cyber/scheduler/processor_context.h"
+
+namespace apollo {
+namespace cyber {
+namespace scheduler {
+
+using croutine::CRoutine;
+
+class Processor {
+ public:
+  Processor();
+  virtual ~Processor();
+
+  void Run();
+  void Stop();
+  void BindContext(const std::shared_ptr<ProcessorContext>& context);
+  void SetAffinity(const std::vector<int>&, const std::string&, int);
+  void SetSchedPolicy(std::string spolicy, int sched_priority);
+
+ private:
+  std::shared_ptr<ProcessorContext> context_;
+
+  std::condition_variable cv_ctx_;
+  std::once_flag thread_flag_;
+  std::mutex mtx_ctx_;
+  std::thread thread_;
+
+  std::atomic<pid_t> tid_{-1};
+  std::atomic<bool> running_{false};
+};
+
+}  // namespace scheduler
+}  // namespace cyber
+}  // namespace apollo
+
+#endif  // CYBER_SCHEDULER_PROCESSOR_H_

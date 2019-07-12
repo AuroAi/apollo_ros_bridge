@@ -1,0 +1,16 @@
+<cyber>
+
+    <module>
+        <name>cyber_ros_bridge</name>
+        <dag_conf></dag_conf>
+        <type>binary</type>
+        <process_name>
+           /home/apollo_ros_bridge/bazel-bin/cyber_ros_bridge/cyber_ros_bridge 
+             --flagfile=/home/apollo_ros_bridge/cyber_ros_bridge/conf/bridge_gflags.conf
+             --flagfile=/home/apollo_ros_bridge/cyber_ros_bridge/conf/trajectory_bridge.conf  
+        </process_name>
+        <version>1.0.0</version>
+    </module>
+
+</cyber>
+
