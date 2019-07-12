@@ -291,14 +291,16 @@ To help development, runtime flags can be specified using gflags. Refer to the d
 
 #### Building the code and running
 
+
 In order to build the bridge, first build the appropriate ros messages used in the bridge source code:
 
-        cd /home/cyber_ros_bridge/ros_pkgs
-        catkin build
+    cd /home/cyber_ros_bridge/ros_pkgs
+    catkin build
 
 Now, build the bridge source code using bazel. From the root workspace of the package,
-        cd /home/apollo_rosr_bridge
-        bazel build cyber_ros_bridge:all
+     
+    cd /home/apollo_ros_bridge
+    bazel build cyber_ros_bridge:all
 
 
 To run the example node, run
@@ -307,7 +309,7 @@ To run the example node, run
 
 for extra logging,
 
-        GLOG_v=4 GLOG_logtostderr=1  ./bazel-bin/cyber_ros_bridge/cyber_ros_bridge
+    GLOG_v=4 GLOG_logtostderr=1  ./bazel-bin/cyber_ros_bridge/cyber_ros_bridge
 
 This launches the bridge with default params (defined in the common folder).
 
@@ -315,13 +317,13 @@ Alternatively, to launch the bridge with custom parameters,
 
     cyber_launch start cyber_ros_bridge/launch/bridge_example.launch
 
+For detailed information on how to add own bridging of topics, refer to [adding custom bridging](https://github.com/AuroAi/apollo_ros_bridge/blob/master/docs/adding_custom_bridging.md "here")
 
 Run [Apollo ](https://github.com/ApolloAuto/apollo/blob/master/docs/quickstart/apollo_3_5_quick_start.md "Apollo ")
 
 Topics can be visualized with rostopic list and echo
 
 Alternatively, publish relevant topics from ROS and view topics using [cyber_monitor](https://github.com/ApolloAuto/apollo/blob/master/docs/cyber/CyberRT_Developer_Tools.md "cyber_monitor") on Apollo's side
-
 
 
 
