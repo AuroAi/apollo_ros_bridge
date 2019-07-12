@@ -10,7 +10,7 @@ Maintainer: Abhilash Balachandran abhilash@ridecell.com
 
 ## Dependencies
 
-- [Apollo 3.5 ](https://github.com/ApolloAuto/apollo/tree/r3.0.0 "Apollo 3.5 ") 
+- [Apollo 3.5 ](https://github.com/ApolloAuto/apollo/tree/r3.5.0 "Apollo 3.5 ") 
 - [nvidia docker ](https://github.com/NVIDIA/nvidia-docker "nvidia docker ")
 
 ## Installation
