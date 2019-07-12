@@ -8,7 +8,7 @@ The apollo ros bridge package supports adding bridging between any ROS message a
 
 Lets say three topics have to be fused to one topic. Topic A is published at 10 hz, Topic B at 10 hz and Topic C at 100 Hz. Then, Topic C is called the **Trigger topic**. This is the topic which decides the publishing rate. All conversions are performed in callbacks of Topic C. What this means is that the converted topic will be published at 100Hz. Callbacks of Topic A and Topic B will merely store data which will then be used in callback of Topic C.
 
-![trigger topic explanation](https://github.com/AuroAi/apollo_ros_bridge/blob/master/images/trigger%20topic.jpg "trigger topic explanation")
+![trigger topic explanation](https://github.com/AuroAi/apollo_ros_bridge/blob/master/images/trigger_topic_exp.pdf "trigger topic explanation")
 
 ### Timer Mode
 
