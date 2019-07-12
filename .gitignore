@@ -1,6 +1,6 @@
 #ignore files 
 bazel*
-
+!bazel.rc
 
 #catkin folders to ignore
 ros_pkgs/.catkin_tools
