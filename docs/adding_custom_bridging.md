@@ -8,7 +8,7 @@ The apollo ros bridge package supports adding bridging between any ROS message a
 
 Lets say three topics have to be fused to one topic. Topic A is published at 10 hz, Topic B at 10 hz and Topic C at 100 Hz. Then, Topic C is called the **Trigger topic**. This is the topic which decides the publishing rate. All conversions are performed in callbacks of Topic C. What this means is that the converted topic will be published at 100Hz. Callbacks of Topic A and Topic B will merely store data which will then be used in callback of Topic C.
 
-TODO:: add picture here
+![trigger topic explanation](https://github.com/AuroAi/apollo_ros_bridge/blob/master/images/trigger%20topic.jpg "trigger topic explanation")
 
 ### Timer Mode
 
@@ -22,7 +22,7 @@ Setting up of custom ROS messages is fairly easy.
 1.  Add the ROS message packages into the ros_pkgs workspace
 1. Build the ROS msg package
 
-The header files generated for the ROS messages are automatically referred to by Bazel when building the cyber_ros_bridge package using the BUILD file (TODO::add link to build file here). 
+The header files generated for the ROS messages are automatically referred to by Bazel when building the cyber_ros_bridge package using the [ros_pkgs.BUILD ](https://github.com/AuroAi/apollo_ros_bridge/blob/master/ros_bazel_builds/ros_pkgs.BUILD "ros_pkgs.BUILD ")file.
 
 Alternatively, custom ROS workspaces can be added by modifying the WORKSPACE file and creating an appropriate BUILD file.
 
@@ -34,7 +34,7 @@ For eg.
 
 ## Configuring YAML file
 
-The yaml file in the folder **yaml_defs** (TODO:: add link here) specifies topic names, which topics have to be used to bridge into relevant topics, which topic is trigger, etc.
+The yaml file in the folder[ **yaml_defs** ](https://github.com/AuroAi/apollo_ros_bridge/tree/master/cyber_ros_bridge/yaml_defs " **yaml_defs** ") specifies topic names, which topics have to be used to bridge into relevant topics, which topic is trigger, etc.
 
 ### Yaml file structure
 
@@ -55,14 +55,14 @@ The yaml file in the folder **yaml_defs** (TODO:: add link here) specifies topic
 
 Multiple topics can be mapped to one Output Topic
 
-An example yaml (TODO:: add link here) file is included in the yaml_defs folder
+An [example yaml](https://github.com/AuroAi/apollo_ros_bridge/blob/master/cyber_ros_bridge/yaml_defs/default.yaml "example yaml")  file is included in the yaml_defs folder
 
 ## Adding custom bridge code
 
 ### Configuring data storage
 To make storing data into variables easier, two structs have been created.
 
-Inside the file cyber_ros_bridge/lib/Data.hpp (TODO:: add link here), add appropriate Apollo topics and ROS topics that will be used in bridging.
+Inside the file [cyber_ros_bridge/lib/Data.hpp ](https://github.com/AuroAi/apollo_ros_bridge/blob/master/cyber_ros_bridge/lib/Data.hpp "cyber_ros_bridge/lib/Data.hpp "), add appropriate Apollo topics and ROS topics that will be used in bridging.
 
 For example,
 
@@ -85,16 +85,17 @@ For example,
    DataField<sensor_msgs::PointCloud2> point_cloud;
  };
 
-Make sure, header files are added to both the Data.hpp (TODO:: add link here) file and to the BUILD (TODO:: add link here) file in the lib folder to avoid bazel build errors.
+
 ```
+Make sure, header files are added to both the [Data.hpp](https://github.com/AuroAi/apollo_ros_bridge/blob/master/cyber_ros_bridge/lib/Data.hpp "Data.hpp")  file and to the [BUILD](https://github.com/AuroAi/apollo_ros_bridge/blob/master/cyber_ros_bridge/lib/BUILD "BUILD")  file in the lib folder to avoid bazel build errors.
 
 ### Specifying supported topics 
 
 To make the code safe during runtime, a list of supported topics have to be specified by the developer before compile time.
 
-In the file cyber_ros_bridge/core/parse_yaml.hpp(TODO:: add link here),
+In the file [cyber_ros_bridge/core/parse_yaml.hpp](https://github.com/AuroAi/apollo_ros_bridge/blob/master/cyber_ros_bridge/core/parse_yaml.hpp "cyber_ros_bridge/core/parse_yaml.hpp").
 
-Find the lines which specify the supported topic list (TODO:: specify the lines)
+Find the [lines](https://github.com/AuroAi/apollo_ros_bridge/blob/4e139f726ea9aa70b4a10311f6cbca99baec3d4e/cyber_ros_bridge/core/parse_yaml.hpp#L84 "lines") which specify the supported topic list.
 
 ```cpp
  //list of supported ros topics
@@ -116,10 +117,10 @@ Find the lines which specify the supported topic list (TODO:: specify the lines)
 
 #### subscriber/reader and publisher/writer variables
 
-For obvious reasons, there is a need to explicitly create variables for subscriptions (reading in the case of cyber) and publishing (writing in the case of cyber) of messages. In the file cyber_ros_bridge/core/cyber_ros_bridge_core.hpp, (TODO:: provide link to the file)
+For obvious reasons, there is a need to explicitly create variables for subscriptions (reading in the case of cyber) and publishing (writing in the case of cyber) of messages. In the file [cyber_ros_bridge/core/cyber_ros_bridge_core.hpp](https://github.com/AuroAi/apollo_ros_bridge/blob/master/cyber_ros_bridge/core/cyber_ros_bridge_core.hpp "cyber_ros_bridge/core/cyber_ros_bridge_core.hpp"),
 
 ##### subscribers and readers
-Add appropriate subscriber or reader variables (TODO:: provide lines here)
+Add appropriate [subscriber or reader variables](https://github.com/AuroAi/apollo_ros_bridge/blob/4e139f726ea9aa70b4a10311f6cbca99baec3d4e/cyber_ros_bridge/core/cyber_ros_bridge_core.hpp#L69 "subscriber or reader variables")
 
 eg:
 
@@ -137,7 +138,7 @@ eg:
 
 #####  publishers and writers
 
-Similarly, create publishers and writer variables for relevant messages (TODO:: provide lines here)
+Similarly, create [publishers and writer variables](https://github.com/AuroAi/apollo_ros_bridge/blob/4e139f726ea9aa70b4a10311f6cbca99baec3d4e/cyber_ros_bridge/core/cyber_ros_bridge_core.hpp#L69 "publishers and writer variables") for relevant messages 
 
 eg:
 
@@ -158,7 +159,7 @@ Default subscribers are non trigger subscribers.
 
 In order to ease development,  template functions are provided for non-trigger subscribers.
 
-In the file cyber_ros_bridge/core/cyber_ros_bridge.cpp(TODO::provide link to the file), in the function RegisterDefaultSubscribers, add an **if** statement registering the subscriber/reader. (TODO:: add link to function)
+In the file [cyber_ros_bridge/core/cyber_ros_bridge.cpp](https://github.com/AuroAi/apollo_ros_bridge/blob/master/cyber_ros_bridge/core/cyber_ros_bridge_core.cpp "cyber_ros_bridge/core/cyber_ros_bridge.cpp"), in the function [RegisterDefaultSubscribers](https://github.com/AuroAi/apollo_ros_bridge/blob/4e139f726ea9aa70b4a10311f6cbca99baec3d4e/cyber_ros_bridge/core/cyber_ros_bridge_core.cpp#L86 "RegisterDefaultSubscribers"), add an **else if** statement registering the subscriber/reader. 
 
 Example:
 
@@ -188,9 +189,9 @@ Note: Trigger topics can be added to default subscribers but will not be initial
 
 ###### Trigger  subscribers
 
-Since Trigger subscribers are the topics which will perform the conversion of messages and publish them, the callbacks have to be custom coded. Examples are provided for help. (TODO:: link to lines here)
+Since Trigger subscribers are the topics which will perform the conversion of messages and publish them, the callbacks have to be custom coded. Examples are provided for help.
 
-In function RegisterTriggerSubscribers,
+In function [RegisterTriggerSubscribers](https://github.com/AuroAi/apollo_ros_bridge/blob/4e139f726ea9aa70b4a10311f6cbca99baec3d4e/cyber_ros_bridge/core/cyber_ros_bridge_core.cpp#L126 "RegisterTriggerSubscribers"),
 
 ```cpp
 // ---------------ROS Topics---------------------
@@ -208,10 +209,9 @@ In function RegisterTriggerSubscribers,
  }
 
 ```
-
 ##### Writing Callbacks
 
-Since trigger subscribers handle special cases, the callbacks have to be custom coded. In the example in the package, conversion functions are written in the lib folder (TODO:: link here) and are called in custom callbacks.
+Since trigger subscribers handle special cases, the callbacks have to be custom coded. In the example in the package, conversion functions are written in the [lib](https://github.com/AuroAi/apollo_ros_bridge/tree/master/cyber_ros_bridge/lib "lib") folder and are called in custom callbacks.
 
 ```cpp
 void cyber_ros_bridge_core::ApolloTrajectoryCallback(const std::shared_ptr<apollo::planning::ADCTrajectory> &msg)
@@ -241,9 +241,9 @@ void cyber_ros_bridge_core::ApolloTrajectoryCallback(const std::shared_ptr<apoll
 
 #### Custom Conversion methods
 
-For conversion of messages between Apollo and ROS, conversion libraries can be written in the lib folder (TODO:: Add link here).
+For conversion of messages between Apollo and ROS, conversion libraries can be written in the [lib](https://github.com/AuroAi/apollo_ros_bridge/tree/master/cyber_ros_bridge/lib "lib") folder.
 
-Example: For converting  `apollo::planning::ADCTrajectory` to  `nav_msgs::Path`, the following function is used (TODO:: link to function here)
+Example: For converting  `apollo::planning::ADCTrajectory` to  `nav_msgs::Path`, the following [function](https://github.com/AuroAi/apollo_ros_bridge/blob/4e139f726ea9aa70b4a10311f6cbca99baec3d4e/cyber_ros_bridge/lib/module_navigation.cpp#L23 "function") is used.
 
 ```cpp
 void cyber_ros_bridge::ApolloTrajectoryToROSPath(const std::shared_ptr<apollo::planning::ADCTrajectory> &trajectory_apollo, nav_msgs::Path &path_cmd)
@@ -267,6 +267,22 @@ void cyber_ros_bridge::ApolloTrajectoryToROSPath(const std::shared_ptr<apollo::p
  path_cmd.header.stamp = ros::Time::now();
 }
 
+```
+
+##### Registering Publishers
+
+To register publishers, [RegisterPublishers](https://github.com/AuroAi/apollo_ros_bridge/blob/4e139f726ea9aa70b4a10311f6cbca99baec3d4e/cyber_ros_bridge/core/cyber_ros_bridge_core.cpp#L160 "RegisterPublishers") can be used. Just copy the template and modify with relevant publisher/writer variables and message types.
+
+```cpp
+  else if (topic.topic_type == "nav_msgs::Odometry")
+  {
+    localization_pub_ = private_ros_node_handle_ptr_->advertise<nav_msgs::Odometry>(topic.topic_name, 1);
+  }
+
+  else if (topic.topic_type == "apollo::drivers::PointCloud")
+  {
+    pc_writer_ = private_cyber_node_handle_ptr_->CreateWriter<apollo::drivers::PointCloud>(topic.topic_name);
+  }
 ```
 
 #### Specifying runtime Flags
@@ -299,7 +315,6 @@ Alternatively, to launch the bridge with custom parameters,
 
     cyber_launch start cyber_ros_bridge/launch/bridge_example.launch
 
-For detailed information on how to add own bridging of topics, refer to here (TODO:: add link to documentation here)
 
 Run [Apollo ](https://github.com/ApolloAuto/apollo/blob/master/docs/quickstart/apollo_3_5_quick_start.md "Apollo ")
 
