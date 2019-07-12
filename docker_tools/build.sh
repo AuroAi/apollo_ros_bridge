@@ -2,7 +2,7 @@
 
 if [ -z "$@" ]
 #TODO:: add hosted docker image url
-IMGNAME="apollo_ros_bridge:latest"
+IMGNAME="auroai/apollo_ros_bridge:latest"
 then
       echo "using default image name = $IMGNAME"
 else

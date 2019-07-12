@@ -9,10 +9,10 @@ docker run \
   -e DISPLAY \
   -e QT_X11_NO_MITSHM=1 \
   -e QT_GRAPHICSSYSTEM=native \
-  -e IMAGE_NAME=apollo_ros_bridge \
+  -e IMAGE_NAME=auroai/apollo_ros_bridge \
   -e TZ=`cat /etc/timezone` \
   --network host \
   --privileged \
- apollo_ros_bridge:latest
+ auroai/apollo_ros_bridge:latest
 
 #   -v ``:/home/cyber_ros_bridge/.bazel
