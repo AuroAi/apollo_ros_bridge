@@ -1,3 +1,6 @@
+
+#The file has been modified from WORKSPACE.in file in Apollo - https://github.com/ApolloAuto/apollo
+
 workspace(name = "cyber_ros_bridge")
 
 # googletest (GTest and GMock)

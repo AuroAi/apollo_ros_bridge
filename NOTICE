@@ -1,0 +1,10 @@
+The repository uses essential components from Apollo (https://github.com/ApolloAuto/apollo) -
+
+1. cyber Module 
+2. Third Party packages
+3. Tools
+4. Protobuff definitions from Apollo in modules directory
+5. Build files for above packages/ modules
+6. scripts
+7. WORKSPACE file
+8. CPPLINT.cfg
