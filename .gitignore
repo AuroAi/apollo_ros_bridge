@@ -13,5 +13,4 @@ ros_pkgs/.catkin_tools
 container_root/*
 !container_root/.bashrc
 
-.adocker_cache.yaml
 .vscode
