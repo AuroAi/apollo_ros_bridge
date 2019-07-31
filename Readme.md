@@ -29,7 +29,7 @@ To build the docker image on your machine,
     cd docker_tools
     ./build.sh $image_name
 
-If no image name is provided, it defaults to [?]
+If no image name is provided, it defaults to auroai/apollo_ros_bridge:latest
 
 ### Building bridge code
 
