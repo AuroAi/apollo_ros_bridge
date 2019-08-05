@@ -217,24 +217,24 @@ Since trigger subscribers handle special cases, the callbacks have to be custom 
 void cyber_ros_bridge_core::ApolloTrajectoryCallback(const std::shared_ptr<apollo::planning::ADCTrajectory> &msg)
 {
 
- try
- {
-   // using a local lock_guard to lock mtx guarantees unlocking on destruction / exception:
-   std::lock_guard<std::mutex> lck(apollo_data_.adctrajectory.mutex);
-   // update CyberData struct
-   apollo_data_.adctrajectory.data = *msg;
-   // call library which converts to ros message
-   nav_msgs::Path nav_path;
-   ApolloTrajectoryToROSPath(msg, nav_path);
+  try
+  {
+    // using a local lock_guard to lock mtx guarantees unlocking on destruction / exception:
+    std::lock_guard<std::mutex> lck(apollo_data_.adctrajectory.mutex);
+    // update CyberData struct
+    apollo_data_.adctrajectory.data = *msg;
+    // call library which converts to ros message
+    nav_msgs::Path nav_path;
+    ApolloTrajectoryToROSPath(msg, nav_path);
 
-   ros_data_.path.data = nav_path;
-   // publish ROS message
-   nav_path_pub_.publish(nav_path);
- }
- catch (std::logic_error &)
- {
-   AERROR << "[exception caught]\n";
- }
+    ros_data_.path.data = nav_path;
+    // publish ROS message
+    nav_path_pub_.publish(nav_path);
+  }
+  catch (const std::exception &e)
+  {
+    AERROR << e.what() << '\n';
+  }
 }
 
 ```
