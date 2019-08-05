@@ -73,4 +73,7 @@ For detailed information on how to add own bridging of topics, refer to [adding 
 
 The apollo ros bridge source code is released under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0 "Apache License, Version 2.0")
 
-
+## Future Updates
+ - [ ] Support for apollo 5.0
+ - [ ] Timer method for bridging
+ - [ ] easier docker setup
