@@ -1,5 +1,10 @@
 FROM nvidia/cuda:8.0-cudnn7-devel-ubuntu14.04
 
+# Set TERM to suppress warning messages.
+ENV DEBIAN_FRONTEND=noninteractive \
+    TERM=xterm
+
+
 RUN apt-get update -y && \
     apt-get install -y \
     wget \
