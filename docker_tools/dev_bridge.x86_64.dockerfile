@@ -1,4 +1,5 @@
-FROM apolloauto/apollo:dev-latest
+ARG VERSION_X86_64="dev-x86_64-20190617_1100"
+FROM apolloauto/apollo:$VERSION_X86_64
 USER root
 
 RUN  sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' && \

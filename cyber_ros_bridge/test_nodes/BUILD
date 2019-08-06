@@ -25,7 +25,7 @@ cc_binary(
     name = "parser_test",
     srcs = ["test_parselib.cpp"],
     deps = [
-        "//cyber_ros_bridge/core:cyber_ros_bridge_core_lib"
+        "//apollo_ros_bridge/cyber_ros_bridge/core:cyber_ros_bridge_core_lib"
     ],
 )
 

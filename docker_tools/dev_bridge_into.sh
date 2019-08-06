@@ -19,7 +19,7 @@
 xhost +local:root 1>/dev/null 2>&1
 docker exec \
     -u $USER \
-    -it apollo_dev_bridge_$USER \
-    /bin/bash -c "source /apollo/scripts/apollo_base.sh && set_lib_path CYBER_ONLY && /bin/bash"
+    -it apollo_dev_$USER \
+    /bin/bash -c "source /apollo/apollo_ros_bridge/scripts/apollo_bridge_base.sh && set_lib_path CYBER_ONLY && /bin/bash"
 
 xhost -local:root 1>/dev/null 2>&1

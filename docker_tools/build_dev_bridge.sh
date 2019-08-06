@@ -26,9 +26,10 @@ CONTEXT="$(dirname "${BASH_SOURCE[0]}")"
 REPO=apolloauto/apollo
 ARCH=$(uname -m)
 TIME=$(date +%Y%m%d_%H%M)
+VERSION_X86_64="x86_64-20190617_1100"
 
-#TAG="${REPO}:dev_bridge-${ARCH}-${TIME}"
-TAG="${REPO}:dev_bridge-latest"
+TAG="${REPO}:dev-bridge-${VERSION_X86_64}"
+# TAG="${REPO}:dev_bridge-latest"
 
 # Fail on first error.
 set -e

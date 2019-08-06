@@ -17,12 +17,12 @@
 ###############################################################################
 
 INCHINA="no"
-LOCAL_IMAGE="no"
+LOCAL_IMAGE="yes"
 FAST_BUILD_MODE="no"
 FAST_TEST_MODE="no"
 VERSION=""
 ARCH=$(uname -m)
-VERSION_X86_64="dev-x86_64-20190617_1100"
+VERSION_X86_64="dev-bridge-x86_64-20190617_1100"
 VERSION_AARCH64="dev-aarch64-20170927_1111"
 VERSION_OPT=""
 
@@ -187,10 +187,10 @@ if [ "$INCHINA" == "yes" ]; then
 fi
 
 if [ "$LOCAL_IMAGE" == "yes" ] && [ -z "$VERSION_OPT" ]; then
-    VERSION="local_dev"
+    VERSION="$VERSION_X86_64"
 fi
 
-VERSION="dev_bridge-latest"
+
 IMG=${DOCKER_REPO}:$VERSION
 
 function local_volumes() {
@@ -222,14 +222,14 @@ function main(){
         info "Start docker container based on local image : $IMG"
     else
         info "Start pulling docker image $IMG ..."
-        # docker pull $IMG
+        docker pull $IMG
         if [ $? -ne 0 ];then
             error "Failed to pull docker image."
             exit 1
         fi
     fi
 
-    APOLLO_DEV="apollo_dev_bridge_${USER}"
+    APOLLO_DEV="apollo_dev_${USER}"
     docker ps -a --format "{{.Names}}" | grep "$APOLLO_DEV" 1>/dev/null
     if [ $? == 0 ]; then
         docker stop $APOLLO_DEV 1>/dev/null
@@ -262,21 +262,21 @@ function main(){
     docker stop ${LOCALIZATION_VOLUME} > /dev/null 2>&1
 
     LOCALIZATION_VOLUME_IMAGE=${DOCKER_REPO}:localization_volume-${ARCH}-latest
-    # docker pull ${LOCALIZATION_VOLUME_IMAGE}
+    docker pull ${LOCALIZATION_VOLUME_IMAGE}
     docker run -it -d --rm --name ${LOCALIZATION_VOLUME} ${LOCALIZATION_VOLUME_IMAGE}
 
     PADDLE_VOLUME=apollo_paddlepaddle_volume_$USER
     docker stop ${PADDLE_VOLUME} > /dev/null 2>&1
 
     PADDLE_VOLUME_IMAGE=${DOCKER_REPO}:paddlepaddle_volume-${ARCH}-latest
-    # docker pull ${PADDLE_VOLUME_IMAGE}
+    docker pull ${PADDLE_VOLUME_IMAGE}
     docker run -it -d --rm --name ${PADDLE_VOLUME} ${PADDLE_VOLUME_IMAGE}
 
     LOCAL_THIRD_PARTY_VOLUME=apollo_local_third_party_volume_$USER
     docker stop ${LOCAL_THIRD_PARTY_VOLUME} > /dev/null 2>&1
 
     LOCAL_THIRD_PARTY_VOLUME_IMAGE=${DOCKER_REPO}:local_third_party_volume-${ARCH}-latest
-    # docker pull ${LOCAL_THIRD_PARTY_VOLUME_IMAGE}
+    docker pull ${LOCAL_THIRD_PARTY_VOLUME_IMAGE}
     docker run -it -d --rm --name ${LOCAL_THIRD_PARTY_VOLUME} ${LOCAL_THIRD_PARTY_VOLUME_IMAGE}
 
     OTHER_VOLUME_CONF="${OTHER_VOLUME_CONF} --volumes-from ${LOCALIZATION_VOLUME} "
@@ -315,6 +315,7 @@ function main(){
 
     set -x
 
+
     ${DOCKER_CMD} run -it \
         -d \
         --privileged \
@@ -346,6 +347,7 @@ function main(){
     if [ "${USER}" != "root" ]; then
         docker exec $APOLLO_DEV bash -c '/apollo/scripts/docker_adduser.sh'
     fi
+    docker exec $APOLLO_DEV bash -c '/apollo/docker/scripts/container_setup.sh'
 
     ok "Finished setting up Apollo docker environment. Now you can enter with: \nbash dev_bridge_into.sh"
     ok "Enjoy!"
