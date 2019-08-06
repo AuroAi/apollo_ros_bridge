@@ -18,9 +18,9 @@ cc_library(
         "//modules/canbus/proto:canbus_proto",
         "//modules/control/proto:control_proto",
         "//modules/drivers/proto:sensor_proto",
-        "//cyber_ros_bridge/common:all_gflags"
+        "//apollo_ros_bridge/cyber_ros_bridge/common:all_gflags"
     ],
 
-    #visibility = ["//cyber_ros_bridge/core:__pkg__"],
+    #visibility = ["//apollo_ros_bridge/cyber_ros_bridge/core:__pkg__"],
 )
 

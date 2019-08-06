@@ -33,8 +33,8 @@
 //-------------- ROS msgs includes --------------
 
 //-------------- External libs includes (Eigen) --------------
-#include "cyber_ros_bridge/core/parse_yaml.hpp"
-#include "cyber_ros_bridge/lib/cyber_ros_bridge_lib.hpp"
+#include "apollo_ros_bridge/cyber_ros_bridge/core/parse_yaml.hpp"
+#include "apollo_ros_bridge/cyber_ros_bridge/lib/cyber_ros_bridge_lib.hpp"
 
 // write a class for parsing the yaml file
 using namespace std;

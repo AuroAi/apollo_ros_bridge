@@ -19,7 +19,7 @@
 
  **************************************************************************/
 
-#include "cyber_ros_bridge/core/parse_yaml.hpp"
+#include "apollo_ros_bridge/cyber_ros_bridge/core/parse_yaml.hpp"
 
 using namespace cyber_ros_bridge;
 using namespace std;

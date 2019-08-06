@@ -18,7 +18,7 @@
  * Desc: Driver node for apollo ros bridge
 
  **************************************************************************/
-#include "cyber_ros_bridge/core/cyber_ros_bridge_core.hpp"
+#include "apollo_ros_bridge/cyber_ros_bridge/core/cyber_ros_bridge_core.hpp"
 
 #include "gflags/gflags.h"
 

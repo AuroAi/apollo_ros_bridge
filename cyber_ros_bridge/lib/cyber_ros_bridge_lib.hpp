@@ -36,7 +36,7 @@
 #include "Data.hpp"
 
 // gflags
-#include "cyber_ros_bridge/common/bridge_gflags.h"
+#include "apollo_ros_bridge/cyber_ros_bridge/common/bridge_gflags.h"
 
 // write a class for parsing the yaml file
 using namespace std;

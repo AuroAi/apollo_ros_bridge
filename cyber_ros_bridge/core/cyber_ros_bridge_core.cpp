@@ -18,7 +18,7 @@
  * Desc: apollo ros core 
 
  **************************************************************************/
-#include "cyber_ros_bridge/core/cyber_ros_bridge_core.hpp"
+#include "apollo_ros_bridge/cyber_ros_bridge/core/cyber_ros_bridge_core.hpp"
 
 using namespace cyber_ros_bridge;
 

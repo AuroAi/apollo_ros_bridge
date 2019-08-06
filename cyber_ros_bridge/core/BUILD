@@ -22,7 +22,7 @@ cc_library(
     #includes = ["../lib"],
     deps = [
         ":parser_lib",
-        "//cyber_ros_bridge/lib:cyber_ros_bridge_lib"
+        "//apollo_ros_bridge/cyber_ros_bridge/lib:cyber_ros_bridge_lib"
     ],
 )
 

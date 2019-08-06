@@ -18,7 +18,7 @@
  * Desc: Lib for conversion of navigation messages
 
  **************************************************************************/
-#include "cyber_ros_bridge/lib/cyber_ros_bridge_lib.hpp"
+#include "apollo_ros_bridge/cyber_ros_bridge/lib/cyber_ros_bridge_lib.hpp"
 
 void cyber_ros_bridge::ApolloPCToROSPC(const std::shared_ptr<apollo::drivers::PointCloud> &pc_msg,sensor_msgs::PointCloud2 &pc_ros)
 {

@@ -15,10 +15,10 @@
  *****************************************************************************/
 
 /**************************************************************************
- * Desc: Lib file for conversion of navigation messages
+ * Desc: Lib file for conversion of driver messages
 
  **************************************************************************/
-#include "cyber_ros_bridge/lib/cyber_ros_bridge_lib.hpp"
+#include "apollo_ros_bridge/cyber_ros_bridge/lib/cyber_ros_bridge_lib.hpp"
 
 void cyber_ros_bridge::ApolloTrajectoryToROSPath(const std::shared_ptr<apollo::planning::ADCTrajectory> &trajectory_apollo, nav_msgs::Path &path_cmd)
 {
