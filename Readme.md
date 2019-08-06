@@ -34,13 +34,6 @@ git clone https://github.com/AuroAi/apollo_ros_bridge.git -b feature/no_dedicate
 
 To build the docker image on your machine, 
 
-You need to tag the apollo's docker to apolloauto/apollo:dev-latest
-
-```
-docker tag apolloauto/apollo:<apollo's tag> apolloauto/apollo:dev-latest
-```
-<apollo's tag > is the tag that the apollo image has. Run docker images to find the tag
-
     cd docker_tools
     ./build_dev_bridge.sh ./dev_bridge.x86_64.dockerfile
 
