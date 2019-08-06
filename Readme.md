@@ -10,12 +10,12 @@ Maintainer: Abhilash Balachandran abhilash@ridecell.com
 
 ## Dependencies
 
-- [Apollo 5.0 ]([https://github.com/ApolloAuto/apollo](https://github.com/ApolloAuto/apollo) "Apollo 5.0 ")
+- [Apollo 5.0 ](https://github.com/ApolloAuto/apollo) "Apollo")
 - [nvidia docker ](https://github.com/NVIDIA/nvidia-docker "nvidia docker ")
 
 ## Installation
 
-### Apollo 5.0
+### Apollo
 Clone apollo auto autonomous driving framework 
 ```
 git clone https://github.com/ApolloAuto/apollo.git
