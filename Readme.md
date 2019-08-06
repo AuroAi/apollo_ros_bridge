@@ -97,9 +97,7 @@ cd /apollo
 ./apollo.sh build
 ```
 
-Now, build the bridge source code using bazel. From the root workspace of the package,
-       
-    bazel build apollo_ros_bridge/cyber_ros_bridge:all
+Note: The above modification suggested will automatically build the bridge package. To explicitly build the bridge package, use bazel build.
 
 
 To run the example node, run
