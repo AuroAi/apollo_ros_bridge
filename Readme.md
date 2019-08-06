@@ -6,6 +6,7 @@
 This is a C++ library which is used to interface messages between [ROS](http://http://www.ros.org/ "ROS")  and [Apollo](https://github.com/ApolloAuto/apollo "Apollo") ecosystem. It is designed to help developers use ROS libraries to communicate with Apollo and hence make development easier. 
 
 Affiliation:  [Ridecell](http://auro.ai/ "Ridecell")
+
 Maintainer: Abhilash Balachandran abhilash@ridecell.com
 
 ## Dependencies
