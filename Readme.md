@@ -56,21 +56,39 @@ In order to build the bridge, first build the appropriate ros messages used in t
 
      cd apollo_ros_bridge/ros_pkgs
      catkin build
-        
+
+#### Modifications in Apollo repo
+
+Minor modifications are made to the Apollo's repo'
+
 Modify the WORKSPACE.in File to include building ros and the custom ros messages. Add the following lines
 
-    #ros_indigo
-    new_local_repository(
+```bash
+#ros_indigo
+new_local_repository(
     name = "ros_indigo",
     build_file = "apollo_ros_bridge/ros_bazel_builds/ros_indigo.BUILD",
     path = "/opt/ros/indigo",
-    )
-	#ros_pkgs
-	new_local_repository(
+)
+
+#ros_pkgs
+new_local_repository(
     name = "ros_pkgs",
     build_file = "apollo_ros_bridge/ros_bazel_builds/ros_pkgs.BUILD",
     path = "apollo_ros_bridge/ros_pkgs/devel",
-    )
+)
+```
+
+To automatically build the bridge, modify the following lines in the [apollo.sh](https://github.com/ApolloAuto/apollo/blob/r5.0.0/apollo.sh "apollo.sh") script [line 119](https://github.com/ApolloAuto/apollo/blob/2e8ad6fecb323915eeb74efa05cfd1647d6c6138/apollo.sh#L119 "line 119")
+
+```bash
+BUILD_TARGETS=`bazel query //modules/... union //cyber/...`
+```
+to
+
+```bash
+BUILD_TARGETS=`bazel query //modules/... union //cyber/... union //apollo_ros_bridge/cyber_ros_bridge ...`
+```
 
 Build apollo
 ```
