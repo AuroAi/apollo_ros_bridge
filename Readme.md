@@ -74,7 +74,7 @@ Modify the WORKSPACE.in File to include building ros and the custom ros messages
 
 Build apollo
 ```
-./apollo.sh
+cd /apollo && ./apollo.sh
 ```
 
 Now, build the bridge source code using bazel. From the root workspace of the package,
