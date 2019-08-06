@@ -41,7 +41,7 @@ docker tag apolloauto/apollo:<apollo's tag> apolloauto/apollo:dev-latest
 <apollo's tag > is the tag that the apollo image has. Run docker images to find the tag
 
     cd docker_tools
-    `./build_dev_bridge.sh ./dev_bridge.x86_64.dockerfile`
+    ./build_dev_bridge.sh ./dev_bridge.x86_64.dockerfile
 
 ### Launching apollo's docker
 
