@@ -30,7 +30,7 @@ RUN  sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main
      apt-get -y clean && \
      rm -rf /home/tmp/google_styleguide && \ 
      git clone https://github.com/google/styleguide.git /home/tmp/google_styleguide && \
-     cd /home/tmp/google_styleguide && \# Modifications copyright (C) 2019 Ridecell
+     cd /home/tmp/google_styleguide && \
      git reset --hard 159b4c81bbca97a9ca00f1195a37174388398a67 && \
      rm -fr .git && \
      cd -
