@@ -88,7 +88,7 @@ BUILD_TARGETS=`bazel query //modules/... union //cyber/...`
 to
 
 ```bash
-BUILD_TARGETS=`bazel query //modules/... union //cyber/... union //apollo_ros_bridge/cyber_ros_bridge`
+BUILD_TARGETS=`bazel query //modules/... union //cyber/... union //apollo_ros_bridge/cyber_ros_bridge/...`
 ```
 
 Build apollo
