@@ -21,7 +21,7 @@
 #include <yaml-cpp/yaml.h>
 #include <fstream>
 #include "cyber/cyber.h"
-#include "cyber_ros_bridge/core/parse_config.hpp"
+#include "apollo_ros_bridge/cyber_ros_bridge/core/parse_yaml.hpp"
 
 // using namespace cyber_ros_bridge;
 
