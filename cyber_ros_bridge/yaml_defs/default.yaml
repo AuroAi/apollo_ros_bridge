@@ -18,11 +18,11 @@
 
 # These are the topics that are converted to Apollo(Cyber) topics
 - Apollo:
-    - Output_Topic_Name: /apollo/sensor/lidar128/compensator/PointCloud2
+    - Output_Topic_Name: /apollo/sensor/lidar128/compensator/PointCloud2_apollo
       msg_type: apollo::drivers::PointCloud
       # publish_freq: 50
       Input_Topics:
-        - Input_Topic_Name: /point_cloud
+        - Input_Topic_Name: /point_cloud_ros
           msg_type: sensor_msgs::PointCloud2
           trigger_topic: true
 

@@ -20,5 +20,5 @@
  **************************************************************************/
 #include "bridge_gflags.h"
 
-DEFINE_string(config_yaml_file, "/home/apollo_ros_bridge/cyber_ros_bridge/yaml_defs/default.yaml", "path to yaml config file");
+DEFINE_string(config_yaml_file, "/apollo/apollo_ros_bridge/cyber_ros_bridge/yaml_defs/default.yaml", "path to yaml config file");
 DEFINE_string(world_frame, "world", "world frame");

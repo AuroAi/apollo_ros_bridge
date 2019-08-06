@@ -203,9 +203,9 @@ void cyber_ros_bridge_core::ApolloTrajectoryCallback(const std::shared_ptr<apoll
     // publish ROS message
     nav_path_pub_.publish(nav_path);
   }
-  catch (std::logic_error &)
+  catch (const std::exception &e)
   {
-    AERROR << "[exception caught]\n";
+    AERROR << e.what() << '\n';
   }
 }
 
@@ -226,9 +226,9 @@ void cyber_ros_bridge_core::ApolloLocalizationCallback(const std::shared_ptr<apo
     // publish ROS message
     localization_pub_.publish(odom);
   }
-  catch (std::logic_error &)
+  catch (const std::exception &e)
   {
-    AERROR << "[exception caught]\n";
+    AERROR << e.what() << '\n';
   }
 }
 
@@ -248,9 +248,9 @@ void cyber_ros_bridge_core::ApolloPCCallback(const std::shared_ptr<apollo::drive
     // publish ROS message
     point_cloud_pub_.publish(point_cloud);
   }
-  catch (std::logic_error &)
+  catch (const std::exception &e)
   {
-    AERROR << "[exception caught]\n";
+    AERROR << e.what() << '\n';
   }
 }
 
@@ -273,8 +273,8 @@ void cyber_ros_bridge_core::ROSPCCallback(const sensor_msgs::PointCloud2::ConstP
     // publish cyber message
     pc_writer_->Write(apollo_data_.point_cloud.data);
   }
-  catch (std::logic_error &)
+  catch (const std::exception &e)
   {
-    AERROR << "[exception caught]\n";
+    AERROR << e.what() << '\n';
   }
 }

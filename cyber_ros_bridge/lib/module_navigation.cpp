@@ -15,7 +15,7 @@
  *****************************************************************************/
 
 /**************************************************************************
- * Desc: Lib file for conversion of driver messages
+ * Desc: Lib file for conversion of navigation messages
 
  **************************************************************************/
 #include "apollo_ros_bridge/cyber_ros_bridge/lib/cyber_ros_bridge_lib.hpp"
