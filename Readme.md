@@ -74,6 +74,14 @@ Topics can be visualized with rostopic list and echo
 
 Alternatively, publish relevant topics from ROS and view topics using [cyber_monitor](https://github.com/ApolloAuto/apollo/blob/master/docs/cyber/CyberRT_Developer_Tools.md "cyber_monitor") on Apollo's side
 
+A sample script to run a ROS Container has been provided to help developers. This can be launched using:
+
+```bash
+cd /home/apollo_ros_bridge/docker_tools
+./example_ros_run.sh
+```
+
+
 ## Adding Custom Bridging
 
 For detailed information on how to add own bridging of topics, refer to [adding custom bridging](https://github.com/AuroAi/apollo_ros_bridge/blob/master/docs/adding_custom_bridging.md "here")
