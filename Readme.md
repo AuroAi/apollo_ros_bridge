@@ -62,7 +62,7 @@ In order to build the bridge, first build the appropriate ros messages used in t
 
 Minor modifications are made to the Apollo's repo'
 
-Modify the WORKSPACE.in File to include building ros and the custom ros messages. Add the following lines
+Modify the [WORKSPACE.in](https://github.com/ApolloAuto/apollo/blob/r5.0.0/WORKSPACE.in "WORKSPACE.in") File to include building ros and the custom ros messages. Add the following lines
 
 ```bash
 #ros_indigo
@@ -88,12 +88,13 @@ BUILD_TARGETS=`bazel query //modules/... union //cyber/...`
 to
 
 ```bash
-BUILD_TARGETS=`bazel query //modules/... union //cyber/... union //apollo_ros_bridge/cyber_ros_bridge ...`
+BUILD_TARGETS=`bazel query //modules/... union //cyber/... union //apollo_ros_bridge/cyber_ros_bridge`
 ```
 
 Build apollo
 ```
-cd /apollo && ./apollo.sh
+cd /apollo 
+./apollo.sh build
 ```
 
 Now, build the bridge source code using bazel. From the root workspace of the package,
