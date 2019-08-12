@@ -9,6 +9,10 @@ This is a C++ library which is used to interface messages between [ROS](http://w
 Affiliation:  [Ridecell](http://auro.ai/ "Ridecell") \
 Maintainer: Abhilash Balachandran abhilash@ridecell.com
 
+![](images/lidar_pcl.gif "Lidar Pointcloud received from Apollo , converted and published as a ROS message. {Left} Cyber_visualizer tool showing cyber pointcloud message. {Right} Rviz showing ros pointcloud message")
+
+Lidar Pointcloud received from Apollo , converted and published as a ROS message. {Left} Cyber_visualizer tool showing cyber pointcloud message. {Right} Rviz showing ros pointcloud message
+
 ## Dependencies
 
 - [Apollo 3.5 ](https://github.com/ApolloAuto/apollo/tree/r3.5.0 "Apollo 3.5 ") 
