@@ -51,7 +51,7 @@ void cyber_ros_bridge_core::InitializeSubscribers(const std::vector<Topic> &topi
   {
     if (topic.topic_flow_dir == "Input")
     {
-      AINFO << "topic type = " << topic.topic_type;
+      AERROR << "topic type = " << topic.topic_type;
       if (mode_ == "Trigger")
       {
         // check if topic is trigger or not
@@ -130,6 +130,10 @@ void cyber_ros_bridge_core::RegisterTriggerSubscribers(const Topic &topic)
   {
     ros_pc_sub_ = private_ros_node_handle_ptr_->subscribe(topic.topic_name, 1, &cyber_ros_bridge_core::ROSPCCallback, this);
   }
+  else if (topic.topic_type == "sensor_msgs::Imu")
+  {
+    ros_imu_sub_ = private_ros_node_handle_ptr_->subscribe(topic.topic_name, 1, &cyber_ros_bridge_core::ROSImuCallback, this);
+  }
 
   // ---------------Apollo Topics---------------------
   // calling custom callbacks
@@ -148,7 +152,11 @@ void cyber_ros_bridge_core::RegisterTriggerSubscribers(const Topic &topic)
     apollo_localization_reader_ = private_cyber_node_handle_ptr_->CreateReader<apollo::localization::LocalizationEstimate>(
         topic.topic_name, std::bind(&cyber_ros_bridge_core::ApolloLocalizationCallback, this, std::placeholders::_1));
   }
-
+  else if (topic.topic_type == "apollo::drivers::gnss::Imu")
+  {
+    apollo_imu_reader_ = private_cyber_node_handle_ptr_->CreateReader<apollo::drivers::gnss::Imu>(
+        topic.topic_name, std::bind(&cyber_ros_bridge_core::ApolloImuCallback, this, std::placeholders::_1));
+  }
   else
   {
     AERROR << topic.topic_type;
@@ -168,6 +176,10 @@ void cyber_ros_bridge_core::RegisterPublishers(const Topic &topic)
   {
     point_cloud_pub_ = private_ros_node_handle_ptr_->advertise<sensor_msgs::PointCloud2>(topic.topic_name, 1);
   }
+  else if (topic.topic_type == "sensor_msgs::Imu")
+  {
+    imu_pub_ = private_ros_node_handle_ptr_->advertise<sensor_msgs::Imu>(topic.topic_name, 1);
+  }
   else if (topic.topic_type == "nav_msgs::Odometry")
   {
     localization_pub_ = private_ros_node_handle_ptr_->advertise<nav_msgs::Odometry>(topic.topic_name, 1);
@@ -176,6 +188,10 @@ void cyber_ros_bridge_core::RegisterPublishers(const Topic &topic)
   else if (topic.topic_type == "apollo::drivers::PointCloud")
   {
     pc_writer_ = private_cyber_node_handle_ptr_->CreateWriter<apollo::drivers::PointCloud>(topic.topic_name);
+  }
+  else if (topic.topic_type == "apollo::drivers::gnss::Imu")
+  {
+    imu_writer_ = private_cyber_node_handle_ptr_->CreateWriter<apollo::drivers::gnss::Imu>(topic.topic_name);
   }
 
   else
@@ -211,7 +227,6 @@ void cyber_ros_bridge_core::ApolloTrajectoryCallback(const std::shared_ptr<apoll
 
 void cyber_ros_bridge_core::ApolloLocalizationCallback(const std::shared_ptr<apollo::localization::LocalizationEstimate> &msg)
 {
-
   try
   {
     // using a local lock_guard to lock mtx guarantees unlocking on destruction / exception:
@@ -278,3 +293,51 @@ void cyber_ros_bridge_core::ROSPCCallback(const sensor_msgs::PointCloud2::ConstP
     AERROR << e.what() << '\n';
   }
 }
+
+void cyber_ros_bridge_core::ROSImuCallback(const sensor_msgs::Imu::ConstPtr &msg)
+{
+  try
+  {
+    // using a local lock_guard to lock mtx guarantees unlocking on destruction / exception:
+    std::lock_guard<std::mutex> lck(ros_data_.imu.mutex);
+    // update ROSData struct
+    ros_data_.imu.data = *msg;
+
+    std::shared_ptr<apollo::drivers::gnss::Imu> imu_apollo;
+
+    // call library which converts to cyber message
+    ROSImuToApolloImu(msg, imu_apollo);
+
+    apollo_data_.imu.data = *imu_apollo;
+    // AINFO << chassis_apollo->DebugString();
+    // publish cyber message
+    imu_writer_->Write(apollo_data_.imu.data);
+  }
+  catch (const std::exception &e)
+  {
+    AERROR << e.what() << '\n';
+  }
+}
+
+void cyber_ros_bridge_core::ApolloImuCallback(const std::shared_ptr<apollo::drivers::gnss::Imu> &msg)
+{
+  try
+  {
+    // using a local lock_guard to lock mtx guarantees unlocking on destruction / exception:
+    std::lock_guard<std::mutex> lck(apollo_data_.imu.mutex);
+    // update CyberData struct
+    apollo_data_.imu.data = *msg;
+    // call library which converts to ros message
+    sensor_msgs::Imu imu;
+    ApolloImuToROSImu(msg, imu);
+
+    ros_data_.imu.data = imu;
+    // publish ROS message
+    imu_pub_.publish(imu);
+  }
+  catch (const std::exception &e)
+  {
+    AERROR << e.what() << '\n';
+  }
+}
+

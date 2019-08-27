@@ -32,6 +32,7 @@
 #include "ros_pkgs/include/nav_msgs/Odometry.h"
 #include "ros_pkgs/include/nav_msgs/Path.h"
 #include <sensor_msgs/PointCloud2.h>
+#include <sensor_msgs/Imu.h>
 
 #include "modules/control/proto/control_cmd.pb.h"
 #include "modules/canbus/proto/chassis.pb.h"
@@ -40,6 +41,8 @@
 #include "modules/planning/proto/planning.pb.h"
 #include "modules/common/proto/pnc_point.pb.h"
 #include "modules/drivers/proto/pointcloud.pb.h"
+#include "modules/drivers/gnss/proto/imu.pb.h"
+
 
 // write a class for parsing the yaml file
 
@@ -60,6 +63,7 @@ namespace cyber_ros_bridge
     DataField<apollo::canbus::Chassis> chassis;
     DataField<apollo::control::ControlCommand> control_cmd;
     DataField<apollo::drivers::PointCloud> point_cloud;
+    DataField<apollo::drivers::gnss::Imu> imu;
   };
 
   struct ROSData
@@ -68,6 +72,7 @@ namespace cyber_ros_bridge
     DataField<nav_msgs::Path> path;
     DataField<nav_msgs::Odometry> odom;
     DataField<sensor_msgs::PointCloud2> point_cloud;
+    DataField<sensor_msgs::Imu> imu;
   };
 }  // namespace cyber_ros_bridge
 
