@@ -67,19 +67,23 @@ private:
 
   // ROS subscriber objects;
   ros::Subscriber ros_pc_sub_;
+  ros::Subscriber ros_imu_sub_;
 
   // ROS Publisher objects
   ros::Publisher point_cloud_pub_;
   ros::Publisher nav_path_pub_;
   ros::Publisher localization_pub_;
+  ros::Publisher imu_pub_;
 
   // Apollo reader objects
   std::shared_ptr<apollo::cyber::Reader<apollo::drivers::PointCloud>> apollo_point_cloud_reader_;
   std::shared_ptr<apollo::cyber::Reader<apollo::localization::LocalizationEstimate>> apollo_localization_reader_;
   std::shared_ptr<apollo::cyber::Reader<apollo::planning::ADCTrajectory>> apollo_trajectory_reader_;
+  std::shared_ptr<apollo::cyber::Reader<apollo::drivers::gnss::Imu>> apollo_imu_reader_;
 
   // Apollo writer objects
   std::shared_ptr<apollo::cyber::Writer<apollo::drivers::PointCloud>> pc_writer_;
+  std::shared_ptr<apollo::cyber::Writer<apollo::drivers::gnss::Imu>> imu_writer_;
 
   // FLAGS
   double FLAGS_buffer_size_ = 1;
@@ -123,8 +127,10 @@ private:
   // specific callbacks for trigger topics
   void ApolloTrajectoryCallback(const std::shared_ptr<apollo::planning::ADCTrajectory> &msg);
   void ApolloPCCallback(const std::shared_ptr<apollo::drivers::PointCloud> &msg);
+  void ApolloImuCallback(const std::shared_ptr<apollo::drivers::gnss::Imu> &msg);
   void ApolloLocalizationCallback(const std::shared_ptr<apollo::localization::LocalizationEstimate> &msg);
   void ROSPCCallback(const sensor_msgs::PointCloud2::ConstPtr &msg);
+  void ROSImuCallback(const sensor_msgs::Imu::ConstPtr &msg);
 
 public:
   // register subscribers and publishers

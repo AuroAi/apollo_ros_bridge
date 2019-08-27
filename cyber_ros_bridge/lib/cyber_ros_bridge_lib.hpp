@@ -54,9 +54,11 @@ void ApolloLocalizationToROSOdom(const std::shared_ptr<apollo::localization::Loc
 
 //converting apollo point cloud to ros point cloud
 void ApolloPCToROSPC(const std::shared_ptr<apollo::drivers::PointCloud> &pc_msg,sensor_msgs::PointCloud2 &pc_ros);
+void ApolloImuToROSImu(const std::shared_ptr<apollo::drivers::gnss::Imu> &imu_msg,sensor_msgs::Imu &imu_ros);
 
 //converting ros point cloud to apollo point cloud
 void ROSPCToApolloPc(const sensor_msgs::PointCloud2::ConstPtr &pc_msg, std::shared_ptr<apollo::drivers::PointCloud> &pc_apollo);
+void ROSImuToApolloImu(const sensor_msgs::Imu::ConstPtr &imu_msg, std::shared_ptr<apollo::drivers::gnss::Imu> &imu_apollo);
 } // namespace cyber_ros_bridge
 
 #endif /* _cyber_ros_bridge_LIB_H_ */

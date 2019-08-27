@@ -83,12 +83,14 @@ public:
   //list of supported ros topics
   std::vector<std::string> supported_ros_topics_list_ = {"nav_msgs::Odometry",
                                                          "nav_msgs::Path",
+                                                         "sensor_msgs::Imu",
                                                          "sensor_msgs::PointCloud2"};
 
   //list of supported cyber topics
   std::vector<std::string> supported_cyber_topics_list_ = {"apollo::localization::LocalizationEstimate",
                                                            "apollo::control::ControlCommand",
                                                            "apollo::drivers::PointCloud",
+                                                           "apollo::drivers::gnss::Imu",
                                                            "apollo::canbus::Chassis",
                                                            "apollo::planning::ADCTrajectory"};
 

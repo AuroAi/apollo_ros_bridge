@@ -25,7 +25,13 @@
         - Input_Topic_Name: /point_cloud_ros
           msg_type: sensor_msgs::PointCloud2
           trigger_topic: true
-
+    - Output_Topic_Name: /apollo/sensor/gnss/imu_out
+      msg_type: apollo::drivers::gnss::Imu
+      # publish_freq: 100
+      Input_Topics:
+        - Input_Topic_Name: /imu_ros
+          msg_type: sensor_msgs::Imu
+          trigger_topic: true
  
     
 # These are the topics that are converted to ROS topics
@@ -49,4 +55,9 @@
         - Input_Topic_Name: /apollo/sensor/lidar128/compensator/PointCloud2
           msg_type: apollo::drivers::PointCloud
           trigger_topic: true 
-
+    - Output_Topic_Name: /imu
+      msg_type: sensor_msgs::Imu
+      Input_Topics:
+        - Input_Topic_Name: /apollo/sensor/gnss/imu
+          msg_type: apollo::drivers::gnss::Imu
+          trigger_topic: true 
