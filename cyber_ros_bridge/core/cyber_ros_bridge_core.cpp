@@ -49,9 +49,10 @@ void cyber_ros_bridge_core::InitializeSubscribers(const std::vector<Topic> &topi
   AINFO << "initializing subscribers";
   for (const auto &topic : topics)
   {
-    if (topic.topic_flow_dir == "Input")
+    AERROR << "FL: name " << topic.topic_type;
+    if (topic.topic_flow_dir == "Input") 
     {
-      AERROR << "topic type = " << topic.topic_type;
+      AERROR << "sub = " << topic.topic_type;
       if (mode_ == "Trigger")
       {
         // check if topic is trigger or not
@@ -78,6 +79,7 @@ void cyber_ros_bridge_core::InitializeSubscribers(const std::vector<Topic> &topi
     }
     else
     {
+      AERROR << "pub = " << topic.topic_type;
       RegisterPublishers(topic);
     }
   }
@@ -303,12 +305,13 @@ void cyber_ros_bridge_core::ROSImuCallback(const sensor_msgs::Imu::ConstPtr &msg
     // update ROSData struct
     ros_data_.imu.data = *msg;
 
-    std::shared_ptr<apollo::drivers::gnss::Imu> imu_apollo;
+    //std::shared_ptr<apollo::drivers::gnss::Imu> imu_apollo;
+    apollo::drivers::gnss::Imu imu_apollo;
 
     // call library which converts to cyber message
     ROSImuToApolloImu(msg, imu_apollo);
 
-    apollo_data_.imu.data = *imu_apollo;
+    apollo_data_.imu.data = imu_apollo;
     // AINFO << chassis_apollo->DebugString();
     // publish cyber message
     imu_writer_->Write(apollo_data_.imu.data);
@@ -321,6 +324,7 @@ void cyber_ros_bridge_core::ROSImuCallback(const sensor_msgs::Imu::ConstPtr &msg
 
 void cyber_ros_bridge_core::ApolloImuCallback(const std::shared_ptr<apollo::drivers::gnss::Imu> &msg)
 {
+  AERROR << "FL: apollo imu call back";
   try
   {
     // using a local lock_guard to lock mtx guarantees unlocking on destruction / exception:

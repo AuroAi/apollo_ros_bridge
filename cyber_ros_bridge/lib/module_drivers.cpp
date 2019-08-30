@@ -190,7 +190,6 @@ void cyber_ros_bridge::ROSPCToApolloPc(const sensor_msgs::PointCloud2::ConstPtr 
             *reinterpret_cast<double *>(&data[offset + stamp_offset]) * 1e9));
     }
     // AINFO << pc_apollo->DebugString();
-
 }
 
 void cyber_ros_bridge::ApolloImuToROSImu(const std::shared_ptr<apollo::drivers::gnss::Imu> &imu_msg,sensor_msgs::Imu &imu_ros)
@@ -217,23 +216,22 @@ void cyber_ros_bridge::ApolloImuToROSImu(const std::shared_ptr<apollo::drivers::
     AINFO << "Received message  " << imu_msg->DebugString();
 }
 
-void cyber_ros_bridge::ROSImuToApolloImu(const sensor_msgs::Imu::ConstPtr &imu_msg, std::shared_ptr<apollo::drivers::gnss::Imu> &imu_apollo)
+void cyber_ros_bridge::ROSImuToApolloImu(const sensor_msgs::Imu::ConstPtr &imu_msg, apollo::drivers::gnss::Imu &imu_apollo)
 {
     // initialize the header
-    auto header = imu_apollo->mutable_header();
+    auto header = imu_apollo.mutable_header();
 
     // set headers, width and height
     header->set_timestamp_sec(imu_msg->header.stamp.toSec());
     header->set_frame_id(imu_msg->header.frame_id);
     header->set_sequence_num(imu_msg->header.seq);
-    imu_apollo->set_measurement_time(imu_msg->header.stamp.toSec());
 
-    imu_apollo->mutable_linear_acceleration()->set_x(imu_msg->linear_acceleration.x);
-    imu_apollo->mutable_linear_acceleration()->set_y(imu_msg->linear_acceleration.y);
-    imu_apollo->mutable_linear_acceleration()->set_z(imu_msg->linear_acceleration.z);
+    imu_apollo.mutable_linear_acceleration()->set_x(imu_msg->linear_acceleration.x);
+    imu_apollo.mutable_linear_acceleration()->set_y(imu_msg->linear_acceleration.y);
+    imu_apollo.mutable_linear_acceleration()->set_z(imu_msg->linear_acceleration.z);
 
-    imu_apollo->mutable_angular_velocity()->set_x(imu_msg->angular_velocity.x);
-    imu_apollo->mutable_angular_velocity()->set_y(imu_msg->angular_velocity.y);
-    imu_apollo->mutable_angular_velocity()->set_z(imu_msg->angular_velocity.z);
+    imu_apollo.mutable_angular_velocity()->set_x(imu_msg->angular_velocity.x);
+    imu_apollo.mutable_angular_velocity()->set_y(imu_msg->angular_velocity.y);
+    imu_apollo.mutable_angular_velocity()->set_z(imu_msg->angular_velocity.z);
     // AINFO << pc_apollo->DebugString();
 }
