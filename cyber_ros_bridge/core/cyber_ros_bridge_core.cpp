@@ -49,10 +49,8 @@ void cyber_ros_bridge_core::InitializeSubscribers(const std::vector<Topic> &topi
   AINFO << "initializing subscribers";
   for (const auto &topic : topics)
   {
-    AERROR << "FL: name " << topic.topic_type;
     if (topic.topic_flow_dir == "Input") 
     {
-      AERROR << "sub = " << topic.topic_type;
       if (mode_ == "Trigger")
       {
         // check if topic is trigger or not
@@ -79,7 +77,6 @@ void cyber_ros_bridge_core::InitializeSubscribers(const std::vector<Topic> &topi
     }
     else
     {
-      AERROR << "pub = " << topic.topic_type;
       RegisterPublishers(topic);
     }
   }
@@ -324,7 +321,6 @@ void cyber_ros_bridge_core::ROSImuCallback(const sensor_msgs::Imu::ConstPtr &msg
 
 void cyber_ros_bridge_core::ApolloImuCallback(const std::shared_ptr<apollo::drivers::gnss::Imu> &msg)
 {
-  AERROR << "FL: apollo imu call back";
   try
   {
     // using a local lock_guard to lock mtx guarantees unlocking on destruction / exception:
