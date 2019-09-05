@@ -199,9 +199,9 @@ void cyber_ros_bridge::ApolloImuToROSImu(const std::shared_ptr<apollo::drivers::
     //convert headers
     auto header = imu_msg->header();
     imu_ros.header.frame_id = FLAGS_world_frame; 
-    //imu_ros.header.seq = header.sequence_num();
-    //imu_ros.header.stamp.sec = header.timestamp_sec();
-    imu_ros.header.stamp = ros::Time::now(); 
+    imu_ros.header.seq = header.sequence_num();
+    imu_ros.header.stamp.sec = header.timestamp_sec();
+    //imu_ros.header.stamp = ros::Time::now(); 
 
     // convert linear acceleration
     imu_ros.linear_acceleration.x = imu_msg->linear_acceleration().x();
