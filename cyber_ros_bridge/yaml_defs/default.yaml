@@ -16,6 +16,9 @@
 #           trigger_topic: Set to true always
 
 
+    
+# These are the topics that are converted to ROS topics
+
 # These are the topics that are converted to Apollo(Cyber) topics
 - Apollo:
     - Output_Topic_Name: /apollo/sensor/lidar128/compensator/PointCloud2_out
@@ -27,15 +30,11 @@
           trigger_topic: true
     - Output_Topic_Name: /apollo/sensor/gnss/imu_out
       msg_type: apollo::drivers::gnss::Imu
-      # publish_freq: 100
       Input_Topics:
-        - Input_Topic_Name: /imu_ros
+        - Input_Topic_Name: /imu
           msg_type: sensor_msgs::Imu
           trigger_topic: true
  
-    
-# These are the topics that are converted to ROS topics
-
 - ROS:
     - Output_Topic_Name: /path
       msg_type: nav_msgs::Path
@@ -55,7 +54,7 @@
         - Input_Topic_Name: /apollo/sensor/lidar128/compensator/PointCloud2
           msg_type: apollo::drivers::PointCloud
           trigger_topic: true 
-    - Output_Topic_Name: /imu
+    - Output_Topic_Name: /imu_ros
       msg_type: sensor_msgs::Imu
       Input_Topics:
         - Input_Topic_Name: /apollo/sensor/gnss/imu
