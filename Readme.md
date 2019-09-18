@@ -63,15 +63,6 @@ Alternatively, to launch the bridge with custom parameters,
 
     cyber_launch start cyber_ros_bridge/launch/bridge_example.launch
 
-Inside Apollo's repo, modify the following lines in [docker/scripts/dev_start.sh](https://github.com/ApolloAuto/apollo/blob/r3.5.0/docker/scripts/dev_start.sh)
-
-Comment out the following [lines](https://github.com/ApolloAuto/apollo/blob/b7df51a491557ad656d219a8f553c286ec053419/docker/scripts/dev_start.sh#L304)
-
-    --add-host in_dev_docker:127.0.0.1 \
-    --add-host ${LOCAL_HOST}:127.0.0.1 \
-    --hostname in_dev_docker \
-This permits communication via ROS ecosystem
-
 Run [Apollo ](https://github.com/ApolloAuto/apollo/blob/master/docs/quickstart/apollo_3_5_quick_start.md "Apollo ")
 
 Topics can be visualized with rostopic list and echo
