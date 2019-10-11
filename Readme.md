@@ -42,6 +42,7 @@ In order to build the bridge, first build the appropriate ros messages used in t
 
     cd /home/apollo_ros_bridge/ros_pkgs
     catkin build
+    source devel/setup.bash
 
 Now, build the bridge source code using bazel. From the root workspace of the package,
      
