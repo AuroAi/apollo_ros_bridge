@@ -4,7 +4,7 @@
 
 # Google infras.
 glog
-protobuf == 3.1
+protobuf == 4.25.8
 python-gflags
 
 # Web utils.
